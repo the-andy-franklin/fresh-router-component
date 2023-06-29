@@ -10,7 +10,7 @@ export default function Home({ url }: PageProps) {
         <Router url={url}>
           <Route path="/home">
             <h1>
-              root
+              home
             </h1>
           </Route>
           <Route path="/pizza">
