@@ -18,7 +18,7 @@ export const Router = (
     child.props.path === url.pathname
   );
 
-  if (child == null) throw new Error("404");
+  if (!child) throw new Error("404");
 
   return child;
 };
