@@ -1,4 +1,4 @@
-import { VNode } from "preact";
+import { render, VNode } from "preact";
 
 type RouteProps = {
   path: string;
@@ -18,5 +18,7 @@ export const Router = (
     child.props.path === url.pathname
   );
 
-  return child ?? null;
+  return child ?? (() => {
+    throw new Error("404");
+  })();
 };
