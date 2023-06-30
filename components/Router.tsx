@@ -1,9 +1,9 @@
-import { createContext, JSX } from "preact";
+import { createContext, type JSX } from "preact";
 import { useContext } from "preact/hooks";
 
 type RouteProps = {
   path: string;
-  children: string | JSX.Element | (string | JSX.Element)[];
+  children?: string | JSX.Element | (string | JSX.Element)[];
 };
 
 export const Route = ({ path, children }: RouteProps) => {
@@ -32,13 +32,16 @@ const RouteContext = createContext({
 });
 
 export const Router = (
-  { url, children }: {
-    url: URL;
-    children: string | JSX.Element | (string | JSX.Element)[];
+  { routeUrl, fileUrl, children }: {
+    routeUrl: URL;
+    fileUrl?: string;
+    children?: string | JSX.Element | (string | JSX.Element)[];
   },
 ) => {
+  const baseUrl = fileUrl?.match(/\/routes(\/.*)\/.+\.tsx?$/)?.[1] ?? "";
+
   return (
-    <RouteContext.Provider value={{ prevPath: "", url }}>
+    <RouteContext.Provider value={{ prevPath: baseUrl, url: routeUrl }}>
       {children}
     </RouteContext.Provider>
   );
