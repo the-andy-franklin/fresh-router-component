@@ -19,6 +19,11 @@ export default function Home({ url }: PageProps) {
                   home/2
                 </p>
               </Route>
+              <Route path="/21">
+                <p>
+                  home/21
+                </p>
+              </Route>
             </Route>
           </Route>
           <Route path="/pizza">

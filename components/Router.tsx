@@ -1,15 +1,21 @@
-import { createContext, h, VNode } from "preact";
+import { createContext, JSX } from "preact";
 import { useContext } from "preact/hooks";
 
 type RouteProps = {
   path: string;
-  children: string | h.JSX.Element | (string | h.JSX.Element)[];
+  children: string | JSX.Element | (string | JSX.Element)[];
 };
 
 export const Route = ({ path, children }: RouteProps) => {
   const { url, prevPath } = useContext(RouteContext);
 
-  if (url.pathname.startsWith(prevPath + path)) {
+  const fullRoute = url.pathname.split("/");
+  const prevRoute = (prevPath + path).split("/");
+
+  const joinedFullRoute = fullRoute.slice(0, prevRoute.length).join("");
+  const joinedPrevRoute = prevRoute.join("");
+
+  if (joinedFullRoute === joinedPrevRoute) {
     return (
       <RouteContext.Provider value={{ url, prevPath: prevPath + path }}>
         {children}
@@ -28,7 +34,7 @@ const RouteContext = createContext({
 export const Router = (
   { url, children }: {
     url: URL;
-    children: VNode<RouteProps> | VNode<RouteProps>[];
+    children: string | JSX.Element | (string | JSX.Element)[];
   },
 ) => {
   return (
