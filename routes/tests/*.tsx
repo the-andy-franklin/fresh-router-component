@@ -13,9 +13,12 @@ export default function Home(props: PageProps) {
         >
           <Route path="/home">
             <p>home</p>
+            <Route path="/pizza">
+              <p>pizza</p>
+            </Route>
           </Route>
           <Route path="/home-pizza">
-            <p>pizza</p>
+            <p>home-pizza</p>
           </Route>
         </Router>
       </div>
