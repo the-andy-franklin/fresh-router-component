@@ -6,12 +6,20 @@ export default function Home({ url }: PageProps) {
   return (
     <div className="h-screen bg-gray-800 overflow-hidden flex">
       <Sidebar />
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-col flex-grow gap-2 justify-center items-center text-white">
         <Router url={url}>
           <Route path="/home">
-            <h1>
-              home
-            </h1>
+            home
+            <Route path="/1">
+              <p>
+                home/1
+              </p>
+              <Route path="/2">
+                <p>
+                  home/2
+                </p>
+              </Route>
+            </Route>
           </Route>
           <Route path="/pizza">
             <p>
